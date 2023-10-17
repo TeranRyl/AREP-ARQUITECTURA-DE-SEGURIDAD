@@ -173,11 +173,13 @@ Esta arquitectura permite escalar el sistema agregando más instancias de `LogSe
 
 Keypair para conexion segura a la instancia:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/9267475b-e0ba-4f2c-bfc6-4dae8ca5ffbe)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/34851e68-0171-4bd7-97b2-3f2094972846)
+
 
 Instancia funcionando:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/4194009b-42f3-4d5c-bcfc-c1529a083b17)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8564b0a8-d0f7-454b-8dce-276d4a81a460)
+
 
 Resumen de informacion de la instancia:
 
