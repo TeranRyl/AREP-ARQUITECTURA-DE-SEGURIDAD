@@ -63,10 +63,10 @@ Paso a paso
 ```
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/a0ddb437-d89f-48ca-b8d1-c7534ca9bf0b)
 
-
+```
 8. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
    
-   - "localhost:35000" (SIN LAS COMILLAS) - Cliente web (RoundRobin).
+   - "[localhost:5001](https://localhost:5002/myPC)" (SIN LAS COMILLAS) - Cliente web (RoundRobin).
    - "localhost:35001/logservice?message=*MENSAJE_DE_PRUEBA1*" (SIN LAS COMILLAS) - Servicio GET (LogService1)
    - "localhost:35002/logservice?message=*MENSAJE_DE_PRUEBA2*" (SIN LAS COMILLAS) - Servicio GET (LogService2)
    - "localhost:35003/logservice?message=*MENSAJE_DE_PRUEBA3*" (SIN LAS COMILLAS) - Servicio GET (LogService3)
