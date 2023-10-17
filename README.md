@@ -66,12 +66,12 @@ Paso a paso
 ```
 8. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
 ```   
-   - [https://localhost:5001/myPC](https://localhost:5001/myPC) - Cliente web (RoundRobin).
-   - [https://localhost:5002/myPC](https://localhost:5002/myPC) - Servicio GET (LogService1)
-   - [https://localhost:5001/yourPC](https://localhost:5001/yourPC)- Servicio GET (LogService2)
-   - [https://localhost:5002/yourPC](https://localhost:5002/yourPC)- Servicio GET (LogService3)
+   - [https://localhost:5001/myPC](https://localhost:5001/myPC) - Invocacion primer servicio seguro.
+   - [https://localhost:5002/myPC](https://localhost:5002/myPC) - Invocacion segundo servicio seguro.
+   - [https://localhost:5001/yourPC](https://localhost:5001/yourPC)- Invocacion segundo servicio seguro desde el puerto 5001.
+   - [https://localhost:5002/yourPC](https://localhost:5002/yourPC)- Invocacion primer servicio seguro desde el puerto 5002.
 
-```
+
 
 
 ## Evaluacion
