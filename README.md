@@ -65,7 +65,7 @@ Paso a paso
 
 ```
 8. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
-   
+```   
    - [localhost:5001](https://localhost:5002/myPC) - Cliente web (RoundRobin).
    - "localhost:35001/logservice?message=*MENSAJE_DE_PRUEBA1*" (SIN LAS COMILLAS) - Servicio GET (LogService1)
    - "localhost:35002/logservice?message=*MENSAJE_DE_PRUEBA2*" (SIN LAS COMILLAS) - Servicio GET (LogService2)
