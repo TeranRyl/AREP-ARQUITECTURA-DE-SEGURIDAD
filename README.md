@@ -1,5 +1,5 @@
 # APLICACIÓN DISTRIBUIDA SEGURA EN TODOS SUS FRENTES
-Una aplicacion web segura utilizando Java y tencologia Spark, desplegada en AWS con los siguientes requerimientos:
+Una aplicacion web segura utilizando Java y tecnologia Spark, desplegada en AWS con los siguientes requerimientos:
 
 1. Permitir un acceso seguro desde el browser a la aplicación. Es decir, garantizar autenticación, autorización e integridad de usuarios.
    
