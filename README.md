@@ -109,7 +109,7 @@ Cliente web (RoundRobin) llamando a un servicio (LogServiceX) desde Docker:
 
 Prueba de demostracion de despliegue de la aplicacion web realizada utilizando EC2 (AWS):
 
-https://youtu.be/TLYuKQVJj7A
+https://youtu.be/b6Fxg4I4Mrg
 
 
 ## Implementacion
