@@ -76,27 +76,51 @@ Paso a paso
 
 ## Evaluacion
 
-Pruebas de app web funcionando:
+PRUEBAS DE ACCESO SEGURO DESDE EL BROWSER A LA APLICACION WEB FUNCIONAL
 
-Cliente web desde Docker:
+Invocacion primer servicio seguro
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/d0d7262f-2e2b-4dfe-b209-22a0b089ce64)
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/28d226b2-3a5e-4417-b4c4-6b3f958478a7)
 
 
 
-Servicio GET 1 desde Docker:
+Invocacion segundo servicio seguro
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/86ad3199-fea5-44ca-8b05-f6496176ec92)
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8cd73224-e568-458c-bf29-59ffb279ec50)
 
 
 
-Servicio GET 2 desde Docker:
+Invocacion segundo servicio seguro desde el puerto 5001
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/a95d00ac-158a-436c-a204-292c5bdd6f03)
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/98b65baa-bbfd-49e2-8c2d-6a7110c314e5)
 
 
 
-Servicio GET 3 desde Docker:
+Invocacion primer servicio seguro desde el puerto 5002
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/1ce6cc71-3608-4577-ac6b-3fb72faf6027)
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/9e8f399a-9cab-4f42-add5-6ce81cebfce5)
 
