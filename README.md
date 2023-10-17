@@ -1,5 +1,5 @@
 # APLICACIÓN DISTRIBUIDA SEGURA EN TODOS SUS FRENTES
-Una aplicacion web segura utilizando Java y tecnologia Spark, desplegada en AWS con los siguientes requerimientos:
+Una aplicacion web segura utilizando Java desplegada en AWS con los siguientes requerimientos:
 
 1. Permitir un acceso seguro desde el browser a la aplicación. Es decir, garantizar autenticación, autorización e integridad de usuarios.
    
@@ -189,7 +189,8 @@ Por lo tanto, cuando un usuario ingresa un mensaje en la página HTML y hace cli
 
 Esta arquitectura permite escalar el sistema agregando más instancias de `LogService` y distribuyendo la carga de manera uniforme entre ellas para manejar un alto volumen de solicitudes de registro. Además, se proporciona una interfaz de usuario simple para interactuar con el sistema.
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/69bfae90-7121-447f-92a9-c22292062cdf)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/e19357e5-b0af-4c7e-95f1-0f82e9a51153)
+
 
 
 ### AWS
