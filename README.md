@@ -76,7 +76,7 @@ Paso a paso
 
 ## Evaluacion
 
-PRUEBAS DE ACCESO SEGURO DESDE EL BROWSER A LA APLICACION WEB FUNCIONAL
+### Prueba de acceso seguro desde el browser a la aplicacion web funcional
 
 Invocacion primer servicio seguro
 
@@ -126,7 +126,7 @@ AWS:
 
 
 
-CERTIFICADOS GENERADOS
+### Certificados generados
 
 Primer servicio
 
@@ -157,7 +157,7 @@ AWS:
 
 
 
-Prueba de demostracion de despliegue de la aplicacion web realizada utilizando EC2 (AWS):
+### Prueba de demostracion de despliegue de la aplicacion web realizada utilizando EC2 (AWS):
 
 https://youtu.be/b6Fxg4I4Mrg
 
