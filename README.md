@@ -27,7 +27,7 @@ Para descargar la aplicacion, ya estando aqui, se necesita un equipo de computo 
 - (RECOMENDACION) Tener todo actualizado
 ```
 
-### Instalando
+### Instalando localmente
 
 Paso a paso
 
