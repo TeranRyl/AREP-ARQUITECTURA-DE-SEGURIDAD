@@ -192,33 +192,20 @@ Esta arquitectura permite escalar el sistema agregando más instancias de `LogSe
 ![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/69bfae90-7121-447f-92a9-c22292062cdf)
 
 
-### Diagrama de clases
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/aa2e832e-f439-4cd9-9290-c080547f2177)
-
-
-
-
-### DockerHub
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/5ecbd9ac-2b9f-4ec8-bf73-72ce943ad5c4)
-
-
-
 ### AWS
 
 
-Keypair para conexion segura a la instancia:
+Keypairs para conexion segura a las instancias:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/34851e68-0171-4bd7-97b2-3f2094972846)
 
 
-Instancia funcionando:
+Instancias funcionando:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8564b0a8-d0f7-454b-8dce-276d4a81a460)
 
 
-Resumen de informacion de la instancia:
+Resumen de informacion de las instancias:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/43a26107-0801-4143-8f0d-622e7e85a1a7)
 
@@ -226,7 +213,7 @@ Resumen de informacion de la instancia:
 
 
 
-Grupo de seguridad de la instancia (reglas de acceso a sus puertos)
+Grupo de seguridad (reglas de acceso a sus puertos) de las instancias:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/182ccae8-9403-4b5c-ab74-0df970dd82e6)
 
