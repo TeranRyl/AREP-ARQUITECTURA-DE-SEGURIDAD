@@ -8,8 +8,8 @@ public class SecureSpark2 {
     public static void main(String[] args) {
         port(getPort());
         //API: secure(keystoreFilePath, keystorePassword, truststoreFilePath truststorePassword);
-        secure("keystore/ecikeystore2.p12", "pwd123", null, null);
-        get("/myPC", (req, res) -> "Hello World, My PC is: PC2");
+        secure("keystores/aws/ecikeystore4.p12", "pwd123", null, null);
+        get("/myPC", (req, res) -> "Hello World, PC is: PC2");
         get("/yourPC", (req, res) -> SecureURLReader.secureURL(getRemoteUrl(), getRemoteKey(), "pwd123"));
     }
 
@@ -24,13 +24,13 @@ public class SecureSpark2 {
         if(System.getenv("URL") != null){
             return System.getenv("URL");
         }
-        return "https://localhost:5001/myPC";
+        return "https://ec2-3-91-52-11.compute-1.amazonaws.com:5001/myPC";
     }
 
     static String getRemoteKey() {
         if (System.getenv("KEY") != null) {
             return System.getenv("KEY");
         }
-        return "keystore/myTrustStore1.p12";
+        return "keystores/aws/myTrustStore3.p12";
     }
 }

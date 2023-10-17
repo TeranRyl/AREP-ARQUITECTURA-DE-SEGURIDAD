@@ -52,7 +52,6 @@ public class SecureURLReader {
 
             // This one can't be read because the Java default truststore has been
             // changed.
-            //readURL("https://www.google.com");
 
         } catch (KeyStoreException ex) {
             Logger.getLogger(SecureURLReader.class.getName()).log(Level.SEVERE, null, ex);
