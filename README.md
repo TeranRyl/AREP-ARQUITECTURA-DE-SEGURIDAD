@@ -126,12 +126,30 @@ AWS:
 
 
 
-Cliente web (RoundRobin) llamando a un servicio (LogServiceX) desde Docker:
+CERTIFICADOS GENERADOS
+
+Primer servicio
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/fa649fbd-45ac-4d5a-9fee-eb1cef033e8b)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/fcb53e09-6fcb-42af-a2be-9c26ff893915)
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8602c26c-69fe-4baf-8cc8-3bd5ae85e0ea)
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/6973b63b-5bde-40d9-8563-b5cd2195eb55)
 
+Segundo servicio
 
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/2dc4eaf5-9efc-4c54-9434-6f0cb6783de2)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/65aba9a2-8790-43ee-81da-b04f81164c3c)
+
+
+
+AWS:
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/387f3725-4001-4ee0-a83b-ff9d613f854b)
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/d25b0c43-bf73-4ee7-8586-d619c7bf51ea)
