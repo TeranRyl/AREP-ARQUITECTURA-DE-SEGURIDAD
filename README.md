@@ -165,32 +165,27 @@ https://youtu.be/b6Fxg4I4Mrg
 
 ## Implementacion
 
-### Arquitectura
+### Arquitectura de seguridad
 
-El proyecto que has proporcionado consta de varias partes que trabajan juntas para lograr un sistema de registro de mensajes distribuidos. La arquitectura general se puede dividir en tres componentes principales:
+La aplicación web distribuida segura consta de tres componentes principales: `SecureSpark1`, `SecureSpark2`, y `SecureURLReader`. Cada uno de estos componentes cumple un papel específico en la arquitectura de seguridad de la aplicación web.
 
-1. **Cliente HTTP (HttpRemoteCaller)**:
-   - Este componente es una clase Java que realiza solicitudes HTTP a los servicios de registro. Se utiliza para enviar mensajes de registro a un servidor remoto.
-   - El método `remoteHttpCall` toma una URL y un mensaje como entrada, realiza una solicitud HTTP GET a esa URL con el mensaje como parámetro y devuelve la respuesta del servidor.
-   - La clase mantiene un arreglo de URLs de servicios de registro para implementar el equilibrio de carga entre múltiples servidores.
+1. **Componentes `SecureSpark1` y `SecureSpark2`**:
+   - Estos componentes son aplicaciones web construidas utilizando el framework Spark para Java.
+   - Cada uno de ellos escucha en un puerto específico, configurado mediante la función `port(getPort())`, donde el puerto es obtenido a través de la función `getPort()`. Si está disponible, el puerto se establece según el valor de la variable de entorno `PORT`, de lo contrario, se establece un valor predeterminado.
+   - Ambos componentes utilizan el método `secure` para habilitar la comunicación segura a través del protocolo HTTPS. Para ello, proporcionan una ubicación del archivo de almacén de claves (keystore) y una contraseña para acceder a dicho almacén. El truststore no se especifica en este caso.
+   - `SecureSpark1` responde a dos rutas: `/myPC` y `/yourPC`. La primera devuelve "Hello World, PC is: PC1", y la segunda utiliza la clase `SecureURLReader` para realizar una solicitud segura a una URL remota.
+   - `SecureSpark2` es similar a `SecureSpark1`, pero se diferencia por el puerto en el que escucha y la respuesta que proporciona.
 
-2. **Servidor Web (LogRoundRobin)**:
-   - Este componente utiliza el marco web Spark para crear un servidor web simple. Spark es un marco web ligero para aplicaciones web en Java.
-   - El servidor escucha en un puerto específico (que se puede configurar) y maneja las solicitudes HTTP entrantes.
-   - El endpoint `/log` recibe las solicitudes GET con un parámetro "message" y utiliza la clase `HttpRemoteCaller` para enviar el mensaje a los servicios de registro remotos.
+2. **Clase `SecureURLReader`**:
+   - Esta clase se encarga de realizar solicitudes seguras a URLs remotas utilizando el protocolo HTTPS.
+   - Toma tres parámetros como entrada: la URL a la que se realizará la solicitud, la ubicación del archivo de truststore y la contraseña para acceder a dicho truststore.
+   - En esta clase, se carga el truststore especificado y se configura un `TrustManagerFactory` para utilizar el truststore. Esto permite la autenticación de los certificados en las conexiones HTTPS.
+   - Se inicializa un objeto `SSLContext` con el `TrustManager` del truststore configurado y se establece como el contexto SSL predeterminado para todas las conexiones.
+   - La clase proporciona un método `readURL` que realiza una solicitud a la URL remota especificada y muestra los encabezados y el cuerpo de la respuesta en la consola.
+   - La respuesta se almacena en una cadena y se devuelve.
 
-3. **Servicio de Registro (LogService)**:
-   - Este componente es otro servidor web que escucha en un puerto diferente.
-   - Utiliza MongoDB como base de datos para almacenar mensajes de registro junto con su fecha de registro.
-   - El endpoint `/logservice` recibe las solicitudes GET con un parámetro "message", registra el mensaje en la base de datos y devuelve los últimos 10 mensajes registrados en formato JSON.
+La arquitectura de seguridad en esta aplicación web se centra en la configuración de HTTPS en los componentes `SecureSpark1` y `SecureSpark2`, lo que permite la comunicación segura a través de conexiones HTTPS. El truststore se utiliza para autenticar los certificados de los servidores remotos a los que se realizan solicitudes.
 
-4. **Interfaz de Usuario (HTML/JavaScript)**:
-   - Se proporciona una página HTML simple que contiene un formulario para que el usuario ingrese un mensaje.
-   - Cuando el usuario hace clic en el botón "Submit", se ejecuta una función JavaScript que utiliza XMLHttpRequest para enviar el mensaje al servidor web principal (`LogRoundRobin`) a través de la ruta `/log`.
-
-Por lo tanto, cuando un usuario ingresa un mensaje en la página HTML y hace clic en "Submit", el cliente web envía una solicitud GET al servidor `LogRoundRobin` a través de la ruta `/log`. El servidor `LogRoundRobin` utiliza la clase `HttpRemoteCaller` para redirigir la solicitud a uno de los servidores de registro (`LogService`) disponibles en un enfoque de equilibrio de carga de Round Robin. El servidor `LogService` registra el mensaje en una base de datos MongoDB y devuelve los últimos 10 mensajes registrados en formato JSON como respuesta.
-
-Esta arquitectura permite escalar el sistema agregando más instancias de `LogService` y distribuyendo la carga de manera uniforme entre ellas para manejar un alto volumen de solicitudes de registro. Además, se proporciona una interfaz de usuario simple para interactuar con el sistema.
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/e19357e5-b0af-4c7e-95f1-0f82e9a51153)
 
