@@ -78,7 +78,7 @@ Paso a paso
 
 ### Prueba de acceso seguro desde el browser a la aplicacion web funcional
 
-Invocacion primer servicio seguro
+#### Invocacion primer servicio seguro
 
 LOCAL:
 
@@ -90,7 +90,7 @@ AWS:
 
 
 
-Invocacion segundo servicio seguro
+#### Invocacion segundo servicio seguro
 
 LOCAL:
 
@@ -102,7 +102,7 @@ AWS:
 
 
 
-Invocacion segundo servicio seguro desde el puerto 5001
+#### Invocacion segundo servicio seguro desde el puerto 5001
 
 LOCAL:
 
@@ -114,7 +114,7 @@ AWS:
 
 
 
-Invocacion primer servicio seguro desde el puerto 5002
+#### Invocacion primer servicio seguro desde el puerto 5002
 
 LOCAL:
 
@@ -128,7 +128,7 @@ AWS:
 
 ### Certificados generados
 
-Primer servicio
+#### Primer servicio
 
 LOCAL:
 
@@ -140,7 +140,7 @@ AWS:
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8602c26c-69fe-4baf-8cc8-3bd5ae85e0ea)
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/6973b63b-5bde-40d9-8563-b5cd2195eb55)
 
-Segundo servicio
+#### Segundo servicio
 
 LOCAL:
 
