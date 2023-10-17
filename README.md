@@ -20,13 +20,9 @@ Para descargar la aplicacion, ya estando aqui, se necesita un equipo de computo 
 
 - Maven instalado
 
-- JavaScript instalado
-
 - Conexion a internet
 
 - Explorador web
-
-- Docker 4.19+
 
 - (RECOMENDACION) Tener todo actualizado
 ```
@@ -40,31 +36,28 @@ Paso a paso
 
 2. Extraer el contenido del archivo comprimido.
 
-3. Abrir el Shell de su preferencia.
+3. Abrir el directorio "AREP-ARQUITECTURA-DE-SEGURIDAD-master" como un proyecto en su IDE de preferencia.
 
-4. Desde el Shell, muevase a la ubicacion donde extrajo el archivo .ZIP (Deberia estar dentro de la carpeta llamada  "AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE-master").
+4. Editar la clase "SecureSpark1" como se muestra a continuacion:
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/7bec1867-13a8-4ad6-9947-7508a3bb7c98)
 
-5. Desde el Shell, escriba "mvn clean install" (este comando compila el proyecto y coloca el artefacto resultante en tu repositorio local de Maven).
+5. Editar la clase "SecureSpark2" como se muestra a continuacion:
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/df60652d-43a5-491e-ab26-2afa3ac669f5)
 
-6. Inicie Docker.
+6. Guardar el proyecto.
 
-7. Desde el Shell, escriba "docker-compose up -d" para generar automáticamente la configuración Docker, los containers, instancias e imaegenes necesarias para desplegarlo utilizando Docker.
+7. Abrir el Shell de su preferencia.
 
-Deberia tener lo siguiente en su Docker.
+8. Desde el Shell, muevase a la ubicacion donde extrajo el archivo .ZIP (es decir, deberia estar dentro de la carpeta llamada  "AREP-ARQUITECTURA-DE-SEGURIDAD-master").
 
-Contenedores:
+9. Desde el Shell, escriba "mvn clean install" (este comando compila el proyecto Java y copiara sus dependencias en el directorio "target" en formato ".jar".
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/9a8499a4-f920-41a0-832b-2f7df5337748)
-
-Imagenes:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/518fa9e7-8eb5-47b7-a5c1-688b2942c819)
-
-Volumenes:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/dab963a1-5b3a-4ef2-9df0-48fc537e7d05)
+10. Desde el Shell, escriba 'java -cp "target/classes;target/dependency/*" co.edu.escuelaing.app.SecureSpark1' para ejecutar el primer servicio. Deberia ver un algo como esto:
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/38d1110f-bb04-403d-81b2-ae006472534b)
 
 
+11. Inicie otra pestaña Shell. Desde esta, ubiquese en el directorio raiz del proyecto (dentro de "AREP-ARQUITECTURA-DE-SEGURIDAD-master") y escriba 'java -cp "target/classes;target/dependency/*" co.edu.escuelaing.app.SecureSpark2' para ejecutar el segundo servicio. Deberia ver algo asi:
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/a0ddb437-d89f-48ca-b8d1-c7534ca9bf0b)
 
 
 8. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
