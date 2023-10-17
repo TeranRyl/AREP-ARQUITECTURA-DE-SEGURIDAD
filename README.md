@@ -22,7 +22,7 @@ Para descargar la aplicacion, ya estando aqui, se necesita un equipo de computo 
 
 - Explorador web
 
-- (RECOMENDACION) Tener todo actualizado
+(RECOMENDACION) Tener todo actualizado
 ```
 
 ### Instalando localmente
