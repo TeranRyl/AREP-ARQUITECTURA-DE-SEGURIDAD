@@ -167,24 +167,31 @@ https://youtu.be/b6Fxg4I4Mrg
 
 ### Arquitectura de seguridad
 
-La aplicación web distribuida segura consta de tres componentes principales: `SecureSpark1`, `SecureSpark2`, y `SecureURLReader`. Cada uno de estos componentes cumple un papel específico en la arquitectura de seguridad de la aplicación web.
+La aplicación web distribuida consta de tres partes principales: dos aplicaciones Spark Java (SecureSpark1 y SecureSpark2) y una clase SecureURLReader, que se encarga de la seguridad de la comunicación entre estas dos aplicaciones.
 
-1. **Componentes `SecureSpark1` y `SecureSpark2`**:
-   - Estos componentes son aplicaciones web construidas utilizando el framework Spark para Java.
-   - Cada uno de ellos escucha en un puerto específico, configurado mediante la función `port(getPort())`, donde el puerto es obtenido a través de la función `getPort()`. Si está disponible, el puerto se establece según el valor de la variable de entorno `PORT`, de lo contrario, se establece un valor predeterminado.
-   - Ambos componentes utilizan el método `secure` para habilitar la comunicación segura a través del protocolo HTTPS. Para ello, proporcionan una ubicación del archivo de almacén de claves (keystore) y una contraseña para acceder a dicho almacén. El truststore no se especifica en este caso.
-   - `SecureSpark1` responde a dos rutas: `/myPC` y `/yourPC`. La primera devuelve "Hello World, PC is: PC1", y la segunda utiliza la clase `SecureURLReader` para realizar una solicitud segura a una URL remota.
-   - `SecureSpark2` es similar a `SecureSpark1`, pero se diferencia por el puerto en el que escucha y la respuesta que proporciona.
+**SecureSpark1 y SecureSpark2:**
+Ambas aplicaciones están implementadas en Spark Java, una tecnologia Java que funciona como servidor. Estas aplicaciones proporcionan dos endpoints cada una: `/myPC` y `/yourPC`. Cada uno de estos endpoints devuelve una respuesta en forma de cadena. Además, las aplicaciones se configuran con una capa de seguridad SSL/TLS utilizando un keystore y confirman la identidad de las partes involucradas en la comunicación.
 
-2. **Clase `SecureURLReader`**:
-   - Esta clase se encarga de realizar solicitudes seguras a URLs remotas utilizando el protocolo HTTPS.
-   - Toma tres parámetros como entrada: la URL a la que se realizará la solicitud, la ubicación del archivo de truststore y la contraseña para acceder a dicho truststore.
-   - En esta clase, se carga el truststore especificado y se configura un `TrustManagerFactory` para utilizar el truststore. Esto permite la autenticación de los certificados en las conexiones HTTPS.
-   - Se inicializa un objeto `SSLContext` con el `TrustManager` del truststore configurado y se establece como el contexto SSL predeterminado para todas las conexiones.
-   - La clase proporciona un método `readURL` que realiza una solicitud a la URL remota especificada y muestra los encabezados y el cuerpo de la respuesta en la consola.
-   - La respuesta se almacena en una cadena y se devuelve.
+En particular, ambas aplicaciones utilizan el método `secure` para habilitar SSL/TLS en la comunicación. La configuración de SSL/TLS incluye la ubicación de un keystore y su contraseña. El keystore se proporciona como un archivo en formato PKCS12 ("ecikeystore1.p12" y "ecikeystore2.p12" para SecureSpark1 y SecureSpark2 respectivamente), y la contraseña asociada. No se utiliza un truststore explícito en estas aplicaciones.
 
-La arquitectura de seguridad en esta aplicación web se centra en la configuración de HTTPS en los componentes `SecureSpark1` y `SecureSpark2`, lo que permite la comunicación segura a través de conexiones HTTPS. El truststore se utiliza para autenticar los certificados de los servidores remotos a los que se realizan solicitudes.
+Los métodos `getRemoteUrl` y `getRemoteKey` obtienen las URL y las rutas de los truststores de las variables de entorno o utilizan valores predeterminados si no se proporciona ninguna.
+
+**SecureURLReader:**
+La clase SecureURLReader es responsable de manejar la seguridad en la comunicación entre las dos aplicaciones. Utiliza un truststore para verificar la autenticidad de los certificados en la comunicación SSL/TLS. 
+
+1. Lee un truststore ("myTrustStore1.p12" o "myTrustStore2.p12") y su contraseña desde un archivo proporcionado y lo carga. El truststore contiene certificados de confianza que se utilizan para verificar la autenticidad de los certificados presentados por las partes con las que se comunica.
+
+2. Inicializa un TrustManagerFactory con el truststore cargado.
+
+3. Inicializa un SSLContext con el TrustManagerFactory para crear un contexto SSL que utiliza los certificados del truststore para verificar los certificados del servidor remoto.
+
+4. Establece el contexto SSL como el contexto predeterminado para todas las conexiones en la aplicación.
+
+5. Llama al método `readURL` para realizar una solicitud a una URL segura (proporcionada como argumento). La solicitud se realiza a través de una conexión SSL/TLS con la configuración segura proporcionada por el SSLContext.
+
+6. El método `readURL` recopila la información de encabezado de la respuesta HTTP y lee el cuerpo del mensaje, mostrando la información en la consola.
+
+La arquitectura de seguridad en esta aplicación se centra en la comunicación segura a través de SSL/TLS y en la autenticación de las partes mediante certificados y truststores. Los truststores se utilizan para garantizar que los certificados presentados por las partes en la comunicación sean confiables y se ajusten a las políticas de seguridad definidas. En este escenario, se utiliza la herramienta "keytool" de Java para generar y administrar los truststores y certificados necesarios. Además, la aplicación Spark Java se configura para usar SSL/TLS en la comunicación, lo que aumenta la seguridad de la transferencia de datos entre las dos aplicaciones.
 
 
 ![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/e19357e5-b0af-4c7e-95f1-0f82e9a51153)
