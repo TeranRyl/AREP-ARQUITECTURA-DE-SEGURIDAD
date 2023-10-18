@@ -16,7 +16,18 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+/**
+ * Clase que realiza solicitudes seguras a URLs remotas y gestiona la seguridad.
+ * @author juan.teran
+ */
 public class SecureURLReader {
+    /**
+     * Realiza una solicitud segura a una URL remota.
+     * @param url      URL remota a la que se realizará la solicitud.
+     * @param file     Ruta del archivo de almacén de confianza.
+     * @param password Contraseña del almacén de confianza.
+     * @return Respuesta de la solicitud.
+     */
     public static String secureURL(String url, String file, String password) {
         try {
 
@@ -69,6 +80,12 @@ public class SecureURLReader {
         return readURL(url);
     }
 
+
+    /**
+     * Realiza la lectura de la URL y muestra los encabezados y el cuerpo de la respuesta.
+     * @param sitetoread URL a leer.
+     * @return Respuesta de la solicitud.
+     */
     public static String readURL(String sitetoread) {
         String result = null;
         try {
