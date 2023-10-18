@@ -1,11 +1,9 @@
-# PATRONES ARQUITECTURALES
-Una aplicacion web desplegada en AWS usando EC2 y Docker:
+# APLICACIÓN DISTRIBUIDA SEGURA EN TODOS SUS FRENTES
+Una aplicacion web segura utilizando Java desplegada en AWS con los siguientes requerimientos:
 
-1. El servicio MongoDB es una instancia de MongoDB corriendo en un container de docker en una máquina virtual de EC2
-
-2. LogService es un servicio REST que recibe una cadena, la almacena en la base de datos y responde en un objeto JSON con las 10 ultimas cadenas almacenadas en la base de datos y la fecha en que fueron almacenadas.
+1. Permitir un acceso seguro desde el browser a la aplicación. Es decir, garantizar autenticación, autorización e integridad de usuarios.
    
-3. La aplicación web APP-LB-RoundRobin está compuesta por un cliente web y al menos un servicio REST. El cliente web tiene un campo y un botón y cada vez que el usuario envía un mensaje, este se lo envía al servicio REST y actualiza la pantalla con la información que este le regresa en formato JSON. El servicio REST recibe la cadena e implementa un algoritmo de balanceo de cargas de Round Robin, delegando el procesamiento del mensaje y el retorno de la respuesta a cada una de las tres instancias del servicio LogService.
+2. Tener al menos dos computadores comunicacndose entre ellos y el acceso de servicios remotos debe garantizar: autenticación, autorización e integridad entre los servicios. Nadie puede invocar los servicios si no está autorizado.
 
 ## Instrucciones para ejecutar
 
@@ -20,18 +18,14 @@ Para descargar la aplicacion, ya estando aqui, se necesita un equipo de computo 
 
 - Maven instalado
 
-- JavaScript instalado
-
 - Conexion a internet
 
 - Explorador web
 
-- Docker 4.19+
-
-- (RECOMENDACION) Tener todo actualizado
+(RECOMENDACION) Tener todo actualizado
 ```
 
-### Instalando
+### Instalando localmente
 
 Paso a paso
 
@@ -40,141 +34,200 @@ Paso a paso
 
 2. Extraer el contenido del archivo comprimido.
 
-3. Abrir el Shell de su preferencia.
+3. Abrir el directorio "AREP-ARQUITECTURA-DE-SEGURIDAD-master" como un proyecto en su IDE de preferencia.
 
-4. Desde el Shell, muevase a la ubicacion donde extrajo el archivo .ZIP (Deberia estar dentro de la carpeta llamada  "AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE-master").
+4. Editar la clase "SecureSpark1" como se muestra a continuacion:
+```
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/7bec1867-13a8-4ad6-9947-7508a3bb7c98)
+```
+5. Editar la clase "SecureSpark2" como se muestra a continuacion:
+```
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/df60652d-43a5-491e-ab26-2afa3ac669f5)
+```
+6. Guardar el proyecto.
 
-5. Desde el Shell, escriba "mvn clean install" (este comando compila el proyecto y coloca el artefacto resultante en tu repositorio local de Maven).
+7. Abrir el Shell de su preferencia.
 
-6. Inicie Docker.
+8. Desde el Shell, muevase a la ubicacion donde extrajo el archivo .ZIP (es decir, deberia estar dentro de la carpeta llamada  "AREP-ARQUITECTURA-DE-SEGURIDAD-master").
 
-7. Desde el Shell, escriba "docker-compose up -d" para generar automáticamente la configuración Docker, los containers, instancias e imaegenes necesarias para desplegarlo utilizando Docker.
+9. Desde el Shell, escriba "mvn clean install" (este comando compila el proyecto Java y copiara sus dependencias en el directorio "target" en formato ".jar".
 
-Deberia tener lo siguiente en su Docker.
+10. Desde el Shell, escriba 'java -cp "target/classes;target/dependency/*" co.edu.escuelaing.app.SecureSpark1' para ejecutar el primer servicio. Deberia ver un algo como esto:
+```
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/38d1110f-bb04-403d-81b2-ae006472534b)
+```
 
-Contenedores:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/9a8499a4-f920-41a0-832b-2f7df5337748)
-
-Imagenes:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/518fa9e7-8eb5-47b7-a5c1-688b2942c819)
-
-Volumenes:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/dab963a1-5b3a-4ef2-9df0-48fc537e7d05)
-
-
-
-
-8. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
-   
-   - "localhost:35000" (SIN LAS COMILLAS) - Cliente web (RoundRobin).
-   - "localhost:35001/logservice?message=*MENSAJE_DE_PRUEBA1*" (SIN LAS COMILLAS) - Servicio GET (LogService1)
-   - "localhost:35002/logservice?message=*MENSAJE_DE_PRUEBA2*" (SIN LAS COMILLAS) - Servicio GET (LogService2)
-   - "localhost:35003/logservice?message=*MENSAJE_DE_PRUEBA3*" (SIN LAS COMILLAS) - Servicio GET (LogService3)
+11. Inicie otra pestaña Shell. Desde esta, ubiquese en el directorio raiz del proyecto (dentro de "AREP-ARQUITECTURA-DE-SEGURIDAD-master") y escriba 'java -cp "target/classes;target/dependency/*" co.edu.escuelaing.app.SecureSpark2' para ejecutar el segundo servicio. Deberia ver algo asi:
+```
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/a0ddb437-d89f-48ca-b8d1-c7534ca9bf0b)
 
 ```
+12. Abra su explorador web de preferencia y busque en una pestaña incognita lo siguiente:
+```   
+   - [https://localhost:5001/myPC](https://localhost:5001/myPC) - Invocacion primer servicio seguro.
+   - [https://localhost:5002/myPC](https://localhost:5002/myPC) - Invocacion segundo servicio seguro.
+   - [https://localhost:5001/yourPC](https://localhost:5001/yourPC)- Invocacion segundo servicio seguro desde el puerto 5001.
+   - [https://localhost:5002/yourPC](https://localhost:5002/yourPC)- Invocacion primer servicio seguro desde el puerto 5002.
+
+```
+NOTA: Una vez haya terminado, puede cerrar cada servicio encendido presionando, desde el Shell, "CTRL" + "C" repetidas veces y el servidor se apagara enseguida.
+```
+
 
 
 ## Evaluacion
 
-Pruebas de app web funcionando:
+### Prueba de acceso seguro desde el browser a la aplicacion web funcional
 
-Cliente web desde Docker:
+#### Invocacion primer servicio seguro
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/a0cb740e-8172-48c8-a2ca-d4e489294c9a)
+LOCAL:
 
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/d0d7262f-2e2b-4dfe-b209-22a0b089ce64)
 
-Servicio GET 1 desde Docker:
+AWS:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/a8116bf4-8dbb-442a-8caa-3ce2cafa6cf2)
-
-
-Servicio GET 2 desde Docker:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/0d3cb346-d1dd-4f1a-a583-b30d4067dda6)
-
-
-Servicio GET 3 desde Docker:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/4dfc452a-cb67-4398-9c92-bb878e665704)
-
-
-Cliente web (RoundRobin) llamando a un servicio (LogServiceX) desde Docker:
-
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/058dbb4e-7be3-49f0-9015-b1a17043d36b)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/28d226b2-3a5e-4417-b4c4-6b3f958478a7)
 
 
 
-Prueba de demostracion de despliegue de la aplicacion web realizada utilizando EC2 (AWS):
+#### Invocacion segundo servicio seguro
 
-https://youtu.be/TLYuKQVJj7A
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/86ad3199-fea5-44ca-8b05-f6496176ec92)
+
+AWS:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8cd73224-e568-458c-bf29-59ffb279ec50)
+
+
+
+#### Invocacion segundo servicio seguro desde el puerto 5001
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/a95d00ac-158a-436c-a204-292c5bdd6f03)
+
+AWS:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/98b65baa-bbfd-49e2-8c2d-6a7110c314e5)
+
+
+
+#### Invocacion primer servicio seguro desde el puerto 5002
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/1ce6cc71-3608-4577-ac6b-3fb72faf6027)
+
+AWS:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/9e8f399a-9cab-4f42-add5-6ce81cebfce5)
+
+
+
+### Certificados generados
+
+#### Primer servicio
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/fa649fbd-45ac-4d5a-9fee-eb1cef033e8b)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/fcb53e09-6fcb-42af-a2be-9c26ff893915)
+
+AWS:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8602c26c-69fe-4baf-8cc8-3bd5ae85e0ea)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/6973b63b-5bde-40d9-8563-b5cd2195eb55)
+
+#### Segundo servicio
+
+LOCAL:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/2dc4eaf5-9efc-4c54-9434-6f0cb6783de2)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/65aba9a2-8790-43ee-81da-b04f81164c3c)
+
+
+
+AWS:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/387f3725-4001-4ee0-a83b-ff9d613f854b)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/d25b0c43-bf73-4ee7-8586-d619c7bf51ea)
+
+
+
+
+### Prueba de demostracion de despliegue de la aplicacion web segura realizada utilizando EC2 (AWS):
+
+https://youtu.be/b6Fxg4I4Mrg
 
 
 ## Implementacion
 
-### Arquitectura
+### Arquitectura de seguridad
 
-El proyecto que has proporcionado consta de varias partes que trabajan juntas para lograr un sistema de registro de mensajes distribuidos. La arquitectura general se puede dividir en tres componentes principales:
+La aplicación web distribuida consta de tres partes principales: dos aplicaciones Spark Java (SecureSpark1 y SecureSpark2) y una clase SecureURLReader, que se encarga de la seguridad de la comunicación entre estas dos aplicaciones.
 
-1. **Cliente HTTP (HttpRemoteCaller)**:
-   - Este componente es una clase Java que realiza solicitudes HTTP a los servicios de registro. Se utiliza para enviar mensajes de registro a un servidor remoto.
-   - El método `remoteHttpCall` toma una URL y un mensaje como entrada, realiza una solicitud HTTP GET a esa URL con el mensaje como parámetro y devuelve la respuesta del servidor.
-   - La clase mantiene un arreglo de URLs de servicios de registro para implementar el equilibrio de carga entre múltiples servidores.
+**SecureSpark1 y SecureSpark2:**
+Ambas aplicaciones están implementadas en Spark Java, una tecnologia Java que funciona como servidor. Estas aplicaciones proporcionan dos endpoints cada una: `/myPC` y `/yourPC`. Cada uno de estos endpoints devuelve una respuesta en forma de cadena. Además, las aplicaciones se configuran con una capa de seguridad SSL/TLS utilizando un keystore y confirman la identidad de las partes involucradas en la comunicación.
 
-2. **Servidor Web (LogRoundRobin)**:
-   - Este componente utiliza el marco web Spark para crear un servidor web simple. Spark es un marco web ligero para aplicaciones web en Java.
-   - El servidor escucha en un puerto específico (que se puede configurar) y maneja las solicitudes HTTP entrantes.
-   - El endpoint `/log` recibe las solicitudes GET con un parámetro "message" y utiliza la clase `HttpRemoteCaller` para enviar el mensaje a los servicios de registro remotos.
+En particular, ambas aplicaciones utilizan el método `secure` para habilitar SSL/TLS en la comunicación. La configuración de SSL/TLS incluye la ubicación de un keystore y su contraseña. El keystore se proporciona como un archivo en formato PKCS12 ("ecikeystore1.p12" y "ecikeystore2.p12" para SecureSpark1 y SecureSpark2 respectivamente), y la contraseña asociada. No se utiliza un truststore explícito en estas aplicaciones.
 
-3. **Servicio de Registro (LogService)**:
-   - Este componente es otro servidor web que escucha en un puerto diferente.
-   - Utiliza MongoDB como base de datos para almacenar mensajes de registro junto con su fecha de registro.
-   - El endpoint `/logservice` recibe las solicitudes GET con un parámetro "message", registra el mensaje en la base de datos y devuelve los últimos 10 mensajes registrados en formato JSON.
+Los métodos `getRemoteUrl` y `getRemoteKey` obtienen las URL y las rutas de los truststores de las variables de entorno o utilizan valores predeterminados si no se proporciona ninguna.
 
-4. **Interfaz de Usuario (HTML/JavaScript)**:
-   - Se proporciona una página HTML simple que contiene un formulario para que el usuario ingrese un mensaje.
-   - Cuando el usuario hace clic en el botón "Submit", se ejecuta una función JavaScript que utiliza XMLHttpRequest para enviar el mensaje al servidor web principal (`LogRoundRobin`) a través de la ruta `/log`.
+**SecureURLReader:**
+La clase SecureURLReader es responsable de manejar la seguridad en la comunicación entre las dos aplicaciones. Utiliza un truststore para verificar la autenticidad de los certificados en la comunicación SSL/TLS. 
 
-Por lo tanto, cuando un usuario ingresa un mensaje en la página HTML y hace clic en "Submit", el cliente web envía una solicitud GET al servidor `LogRoundRobin` a través de la ruta `/log`. El servidor `LogRoundRobin` utiliza la clase `HttpRemoteCaller` para redirigir la solicitud a uno de los servidores de registro (`LogService`) disponibles en un enfoque de equilibrio de carga de Round Robin. El servidor `LogService` registra el mensaje en una base de datos MongoDB y devuelve los últimos 10 mensajes registrados en formato JSON como respuesta.
+1. Lee un truststore ("myTrustStore1.p12" o "myTrustStore2.p12") y su contraseña desde un archivo proporcionado y lo carga. El truststore contiene certificados de confianza que se utilizan para verificar la autenticidad de los certificados presentados por las partes con las que se comunica.
 
-Esta arquitectura permite escalar el sistema agregando más instancias de `LogService` y distribuyendo la carga de manera uniforme entre ellas para manejar un alto volumen de solicitudes de registro. Además, se proporciona una interfaz de usuario simple para interactuar con el sistema.
+2. Inicializa un TrustManagerFactory con el truststore cargado.
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/69bfae90-7121-447f-92a9-c22292062cdf)
+3. Inicializa un SSLContext con el TrustManagerFactory para crear un contexto SSL que utiliza los certificados del truststore para verificar los certificados del servidor remoto.
 
+4. Establece el contexto SSL como el contexto predeterminado para todas las conexiones en la aplicación.
 
-### Diagrama de clases
+5. Llama al método `readURL` para realizar una solicitud a una URL segura (proporcionada como argumento). La solicitud se realiza a través de una conexión SSL/TLS con la configuración segura proporcionada por el SSLContext.
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/aa2e832e-f439-4cd9-9290-c080547f2177)
+6. El método `readURL` recopila la información de encabezado de la respuesta HTTP y lee el cuerpo del mensaje, mostrando la información en la consola.
+
+La arquitectura de seguridad en esta aplicación se centra en la comunicación segura a través de SSL/TLS y en la autenticación de las partes mediante certificados y truststores. Los truststores se utilizan para garantizar que los certificados presentados por las partes en la comunicación sean confiables y se ajusten a las políticas de seguridad definidas. En este escenario, se utiliza la herramienta "keytool" de Java para generar y administrar los truststores y certificados necesarios. Además, la aplicación Spark Java se configura para usar SSL/TLS en la comunicación, lo que aumenta la seguridad de la transferencia de datos entre las dos aplicaciones.
 
 
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/e19357e5-b0af-4c7e-95f1-0f82e9a51153)
 
+### Escalabilidad
 
-### DockerHub
+La arquitectura de seguridad del proyecto se basa en la configuracion de seguridad SSL/TLS, que proporciona una capa de cifrado segura para las comunicaciones web. Esta arquitectura se podria escalar para incorporar un nuevo **Servicio de Autenticación y Autorización.** Un servicio dedicado que manejaria la autenticación de usuarios y la autorización de sus acciones en la aplicación. Esto incluiría la gestión de contraseñas, tokens de acceso y control de roles y permisos. El servicio de autenticacion permitiria a los usuarios registrarse, iniciar sesion y gestionar sus cuentas, lo cual puede incluir la autenticacion de dos factores y la gestion de contraseñas.
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/5ecbd9ac-2b9f-4ec8-bf73-72ce943ad5c4)
-
-
+Esta incorporacion seria una estrategia eficaz para mejorar la funcionalidad y seguridad de la aplicacion, pues permite una gestion mas efectiva de los recursos y una mejor adaptacion a las necesidades cambiantes de los usuarios y de los negocios. Ademas, por la base de seguridad SSL/TLS de la arquitectura, seria sencillo incorporar el servicio y garantizar consistencia en la seguridad de toda la aplicacion web.
 
 ### AWS
 
 
-Keypair para conexion segura a la instancia:
+Keypairs para conexion segura a las instancias:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/9267475b-e0ba-4f2c-bfc6-4dae8ca5ffbe)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/34851e68-0171-4bd7-97b2-3f2094972846)
 
-Instancia funcionando:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/4194009b-42f3-4d5c-bcfc-c1529a083b17)
+Instancias funcionando:
 
-Resumen de informacion de la instancia:
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/8564b0a8-d0f7-454b-8dce-276d4a81a460)
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/0c5f86f9-17ef-46cb-9f70-2e3009674ff3)
 
-Grupo de seguridad de la instancia (reglas de acceso a sus puertos)
+Resumen de informacion de las instancias:
 
-![image](https://github.com/TeranRyl/AREP-PATRONES-ARQUITECTURALES-EN-LA-NUBE/assets/81679109/988de2e6-ca37-49d6-9304-320b45bcfc2e)
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/43a26107-0801-4143-8f0d-622e7e85a1a7)
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/1a97e6a1-c570-45b2-9aad-0971de25ba93)
+
+
+
+Grupo de seguridad (reglas de acceso a sus puertos) de las instancias:
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/182ccae8-9403-4b5c-ab74-0df970dd82e6)
+
+![image](https://github.com/TeranRyl/AREP-ARQUITECTURA-DE-SEGURIDAD/assets/81679109/ab5e92bf-43ff-498f-ac73-abca84fec2ab)
 
 
 
@@ -185,7 +238,6 @@ Grupo de seguridad de la instancia (reglas de acceso a sus puertos)
 * [Maven](https://maven.apache.org/) - Gestion de ciclo de vida, codigo fuente y dependencias
 * [Git/Github](https://git-scm.com/) - Almacenar el codigo fuente
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/) - IDE para desarrollo
-* [Docker](https://www.docker.com/) - Virtualizacion
 
 ## Autores
 
