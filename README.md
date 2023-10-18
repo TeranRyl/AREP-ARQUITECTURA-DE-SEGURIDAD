@@ -200,7 +200,7 @@ La arquitectura de seguridad en esta aplicación se centra en la comunicación s
 
 La arquitectura de seguridad del proyecto se basa en la configuracion de seguridad SSL/TLS, que proporciona una capa de cifrado segura para las comunicaciones web. Esta arquitectura se podria escalar para incorporar un nuevo **Servicio de Autenticación y Autorización.** Un servicio dedicado que manejaria la autenticación de usuarios y la autorización de sus acciones en la aplicación. Esto incluiría la gestión de contraseñas, tokens de acceso y control de roles y permisos. El servicio de autenticacion permitiria a los usuarios registrarse, iniciar sesion y gestionar sus cuentas, lo cual puede incluir la autenticacion de dos factores y la gestion de contraseñas.
 
-Esta incorporacion seria una estrategia eficaz para mejorar la funcionalidad y seguridad de la aplicacion, pues permite una gestion mas efectiva de los recursos y una mejor adaptacion a las necesidades cambiantes de los usuarios y de los negocios. Por la base de seguridad SSL/TLS de la arquitectura, seria sencillo incorporar el servicio y garantizar consistencia en la seguridad de toda la aplicacion web.
+Esta incorporacion seria una estrategia eficaz para mejorar la funcionalidad y seguridad de la aplicacion, pues permite una gestion mas efectiva de los recursos y una mejor adaptacion a las necesidades cambiantes de los usuarios y de los negocios. Ademas, por la base de seguridad SSL/TLS de la arquitectura, seria sencillo incorporar el servicio y garantizar consistencia en la seguridad de toda la aplicacion web.
 
 ### AWS
 
